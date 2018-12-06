@@ -30,12 +30,12 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+        System.out.println("TEST START");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-
+        System.out.println("TEST SUCCESS");
     }
 
     @Override
@@ -61,6 +61,7 @@ public class TestListener implements ITestListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("TEST FAIL");
     }
 
     @Override

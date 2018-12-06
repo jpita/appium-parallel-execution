@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.eliasnogueira;
+package com.eliasnogueira.test;
 
-import static org.testng.Assert.assertEquals;
-
-import com.eliasnogueira.po.MainScreenPageObject;
+import com.eliasnogueira.pageobjects.MainScreenPageObject;
 import com.eliasnogueira.support.BaseTest;
-
-import org.testng.annotations.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class TipTest  extends BaseTest {
 
 	@Test
-	public void testCalculateDefaultTip() {
+    public void test1() {
 
 		MainScreenPageObject mainScreen = new MainScreenPageObject(driver);
 		
 		mainScreen.fillBillAmount("100");
 		mainScreen.clickCalculateTip();
 
-        assertEquals("$15.00", mainScreen.getTipAmount());
-        assertEquals("$115.00", mainScreen.getTotalAmount());
+        Assert.assertTrue(mainScreen.getTipAmount().contains("15"));
+        Assert.assertTrue(mainScreen.getTotalAmount().contains("115"));
 	}
-
 }
