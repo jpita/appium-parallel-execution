@@ -9,8 +9,9 @@ import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.io.File;
@@ -20,17 +21,14 @@ public class BaseTest {
 
     public AppiumDriver<?> driver = null;
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     @Parameters( { "platform", "udid", "platformVersion"})
-    public void beforeTest(String platform, String udid, String platformVersion) throws Exception {
+    public void beforeTest(@Optional("android") String platform, @Optional("emulator-5554") String udid, @Optional("9") String platformVersion) throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability(MobileCapabilityType.UDID, udid);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-
-        // create the complete URL based on config.properties information
-        String completeURL = "http://" + Utils.readProperty("run.ip") + ":" + Utils.readProperty("run.port") + "/wd/hub";
-
+        String url = "http://localhost:4444/wd/hub";
         switch (platform.toLowerCase()) {
             case "ios":
                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
@@ -47,12 +45,14 @@ public class BaseTest {
                     capabilities.setCapability(IOSMobileCapabilityType.APP_NAME, Utils.readProperty("app.ios.appName"));
                 }
 
-                driver = new IOSDriver<MobileElement>(new URL(completeURL), capabilities);
+
+                driver = new IOSDriver<MobileElement>(new URL(url), capabilities);
                 break;
 
             case "android":
                 capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+//                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 
                 if (Boolean.parseBoolean(Utils.readProperty("install.app"))) {
                     capabilities.setCapability(MobileCapabilityType.APP, new File(Utils.readProperty("app.android.path")).getAbsolutePath());
@@ -61,7 +61,7 @@ public class BaseTest {
                     capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, Utils.readProperty("app.android.appActivity"));
                 }
 
-                driver = new AndroidDriver<MobileElement>(new URL(completeURL), capabilities);
+                driver = new AndroidDriver<MobileElement>(new URL(url), capabilities);
                 break;
 
             default:
@@ -69,7 +69,7 @@ public class BaseTest {
         }
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
