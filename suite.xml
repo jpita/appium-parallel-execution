@@ -1,31 +1,29 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite" parallel="tests" thread-count="3" >
+<suite name="Suite" parallel="tests" thread-count="3" time-out="60000">
 
-    <test name="Android emulator">
+    <test name="Android 9 emulator">
         <parameter name="platform" value="android"/>
         <parameter name="udid" value="emulator-5554"/>
-        <parameter name="platformVersion" value="5.0.2"/>
+        <parameter name="platformVersion" value="9"/>
         <classes>
-            <class name="com.eliasnogueira.TipTest"/>
+            <class name="com.eliasnogueira.test.TipTest"/>
         </classes>
     </test>
-
-    <test name="Genymotion">
+    <test name="Galaxy S9">
         <parameter name="platform" value="android"/>
-        <parameter name="udid" value="192.168.56.101:5555"/>
-        <parameter name="platformVersion" value="7.1.0"/>
+        <parameter name="udid" value="21f4a18103037ece"/>
+        <parameter name="platformVersion" value="8"/>
         <classes>
-            <class name="com.eliasnogueira.TipTest"/>
+            <class name="com.eliasnogueira.test.TipTest2"/>
         </classes>
     </test>
-
-    <test name="iOS-Iphone-Simulator-7-plus">
-        <parameter name="platform" value="ios"/>
-        <parameter name="udid" value="3C9FB71E-9C0E-49A7-AD65-3CCCD3A50301"/>
-        <parameter name="platformVersion" value="11.2"/>
+    <test name="Android 7.0 emulator">
+        <parameter name="platform" value="android"/>
+        <parameter name="udid" value="emulator-5556"/>
+        <parameter name="platformVersion" value="7.0"/>
         <classes>
-            <class name="com.eliasnogueira.TipTest"/>
+            <class name="com.eliasnogueira.test.TipTest3"/>
         </classes>
     </test>
 </suite>
