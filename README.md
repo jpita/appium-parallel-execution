@@ -74,4 +74,19 @@ Please, read this post: [https://medium.com/@eliasnogueira/got-capabilitynotpres
 Please fill an issue ;-)
 
 
+### Learnings
+
+When working with appium in parallel you need to pay attention to a few simple but very important things.
+
+If you take a look at the start-commands.txt file and the json files for appium, you need to set different ports for a few different things:
+* wda
+* systemPort
+* boostrapPort
+
+I lost many hours of trial and error until I finally got a working solution with 2 devices, despite the fact that I had 3 devices configured but only 2 were running the tests.
+
+Another thing, I could never point my tests to the exact device I wanted, even though I put the exact udid and android version on the capabilities when running the tests locally ,for some reason the tests always run on different devices.
+
+
+
 
