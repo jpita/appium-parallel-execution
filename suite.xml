@@ -1,27 +1,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite" parallel="tests" thread-count="3" time-out="60000">
+<suite name="Suite" parallel="tests" thread-count="3" time-out="600000">
 
-    <test name="Android 9 emulator">
+    <test name="Android 7">
         <parameter name="platform" value="android"/>
         <parameter name="udid" value="emulator-5554"/>
-        <parameter name="platformVersion" value="9"/>
+        <parameter name="platformVersion" value="7"/>
         <classes>
             <class name="com.eliasnogueira.test.TipTest"/>
         </classes>
     </test>
-    <test name="Galaxy S9">
+    <test name="Android 8">
         <parameter name="platform" value="android"/>
-        <parameter name="udid" value="21f4a18103037ece"/>
+        <parameter name="udid" value="emulator-5558"/>
         <parameter name="platformVersion" value="8"/>
         <classes>
             <class name="com.eliasnogueira.test.TipTest2"/>
         </classes>
     </test>
-    <test name="Android 7.0 emulator">
+    <test name="Android 9">
         <parameter name="platform" value="android"/>
         <parameter name="udid" value="emulator-5556"/>
-        <parameter name="platformVersion" value="7.0"/>
+        <parameter name="platformVersion" value="9"/>
         <classes>
             <class name="com.eliasnogueira.test.TipTest3"/>
         </classes>

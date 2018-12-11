@@ -5,7 +5,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -25,34 +24,23 @@ public class BaseTest {
     @Parameters( { "platform", "udid", "platformVersion"})
     public void beforeTest(@Optional("android") String platform, @Optional("emulator-5554") String udid, @Optional("9") String platformVersion) throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
-        capabilities.setCapability(MobileCapabilityType.UDID, udid);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+//        capabilities.setCapability("--session-override",true);
         String url = "http://localhost:4444/wd/hub";
+//        String url = "http://0.0.0.0:4723/wd/hub";
         switch (platform.toLowerCase()) {
             case "ios":
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "411025BC-3F30-4967-8EE7-5C42B5CF8AEF");
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.IOS);
-
-                // if iOS 9+ use XCUITest
-                if (Boolean.parseBoolean(Utils.readProperty("platform.ios.xcode8"))) {
-                    capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-                }
-
-                if (Boolean.parseBoolean(Utils.readProperty("install.app"))) {
-                    capabilities.setCapability(MobileCapabilityType.APP, new File(Utils.readProperty("app.ios.path")).getAbsolutePath());
-                } else {
-                    capabilities.setCapability(IOSMobileCapabilityType.APP_NAME, Utils.readProperty("app.ios.appName"));
-                }
-
-
+                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+                capabilities.setCapability(MobileCapabilityType.APP, "/Users/pita/appium-parallel-execution/app/FasTip.app");
                 driver = new IOSDriver<MobileElement>(new URL(url), capabilities);
                 break;
 
             case "android":
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, udid);
+                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-//                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+//                capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
 
                 if (Boolean.parseBoolean(Utils.readProperty("install.app"))) {
                     capabilities.setCapability(MobileCapabilityType.APP, new File(Utils.readProperty("app.android.path")).getAbsolutePath());

@@ -1,0 +1,29 @@
+{
+  "capabilities": [
+    {
+      "browserName": "",
+      "platformVersion": "9",
+      "platformName": "ANDROID",
+      "maxInstances": 1,
+      "udid": "emulator-5554",
+      "deviceName": "emulator-5554",
+      "automationName": "UiAutomator2",
+      "systemPort": "8202",
+      "wdaLocalPort": "8103"
+    }
+  ],
+  "configuration": {
+    "cleanUpCycle": 1000,
+    "timeout": 20000,
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "url": "http://127.0.0.1:4725/wd/hub",
+    "host": "127.0.0.1",
+    "port": 4725,
+    "maxSession": 1,
+    "register": true,
+    "registerCycle": 1000,
+    "hubPort": 4444,
+    "hubHost": "127.0.0.1",
+    "session-override": true
+  }
+}

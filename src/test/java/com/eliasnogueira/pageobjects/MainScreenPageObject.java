@@ -17,45 +17,47 @@ package com.eliasnogueira.pageobjects;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MainScreenPageObject {
 
-	@AndroidFindBy(id = "org.traeg.fastip:id/billAmtEditText")
-	MobileElement billAmount;
-	
+    @iOSFindBy(xpath = "//*[@name=\"FasTip\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeTextField[1]")
+    @AndroidFindBy(id = "org.traeg.fastip:id/billAmtEditText")
+    MobileElement enterCheckAmountTextField;
+
+    @iOSFindBy(xpath = "//*[@name=\"Calculate Tip\"]")
 	@AndroidFindBy(id = "org.traeg.fastip:id/calcTipButton")
-	MobileElement calculateTip;
+    MobileElement calculateTipButton;
 
-	@AndroidFindBy(id = "org.traeg.fastip:id/tipAmtTextView")
-	MobileElement tipAmount;
+    @iOSFindBy(xpath = "//XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]")
+    @AndroidFindBy(id = "org.traeg.fastip:id/tipAmtTextView")
+    MobileElement tipAmountLabel;
 
-	@AndroidFindBy(id = "org.traeg.fastip:id/totalAmtTextView")
-	MobileElement totalAmount;
-
-    @AndroidBy(id = "org.traeg.fastip:id/calcTipButton")
+    @iOSFindBy(xpath = "//*[@name=\"FasTip\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[4]")
+    @AndroidFindBy(id = "org.traeg.fastip:id/totalAmtTextView")
+    MobileElement totalAmountLabel;
 
     public MainScreenPageObject(AppiumDriver<?> driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
 	public void fillBillAmount(String amount) {
-		billAmount.sendKeys(amount);
+        enterCheckAmountTextField.sendKeys(amount);
 	}
 
 	public void clickCalculateTip() {
-		calculateTip.click();
+        calculateTipButton.click();
 	}
 	
 	public String getTipAmount() {
-		return tipAmount.getText();
+        return tipAmountLabel.getText();
 	}
 	
 	public String getTotalAmount() {
-		return totalAmount.getText();
+        return totalAmountLabel.getText();
 	}
 	
 }

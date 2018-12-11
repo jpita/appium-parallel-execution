@@ -2,26 +2,31 @@
   "capabilities":
   [
     {
-      "browserName":"Android Nougat",
-      "version":"7.1.0",
-      "platform":"ANDROID",
-      "maxInstances": 1
+      "browserName": "",
+      "platformVersion": "8",
+      "platformName": "ANDROID",
+      "maxInstances": 1,
+      "udid": "emulator-5556",
+      "deviceName": "emulator-5556",
+      "automationName": "UiAutomator2",
+      "systemPort": "8203",
+      "wdaLocalPort": "8101"
     }
   ],
 
   "configuration":
   {
-    "cleanUpCycle":2000,
+    "cleanUpCycle": 1000,
     "timeout":20000,
     "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
-    "url": "http://127.0.0.1:4724/wd/hub",
+    "url": "http://127.0.0.1:4723/wd/hub",
     "host": "127.0.0.1",
-    "port": 4724,
+    "port": 4723,
     "maxSession": 1,
     "register": true,
     "registerCycle": 1000,
     "hubPort": 4444,
-    "hubHost": "192.168.56.1",
+    "hubHost": "127.0.0.1",
     "session-override": true
   }
 }
